@@ -10,10 +10,6 @@ public class MainActivity extends AppCompatActivity {
     public static class calc {
 
         //Method to get inverse sine
-        public static double getInverseSin(double v) {
-            return 1 / Math.sin(Math.toRadians(v));
-        }
-
         public static double getOffset(int x, double y){
             double multiplier = 1 / Math.sin(Math.toRadians(x));
             return multiplier * y;
@@ -58,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     int angleValue = 0;
     double offsetValue = 0;
-    double multiplierValue = 0;
+    double offsetFraction = 0;
+    double result = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +64,12 @@ public class MainActivity extends AppCompatActivity {
 
         final SeekBar seekAngle = (SeekBar) findViewById(R.id.seekAngle);
         final SeekBar seekOffset = (SeekBar) findViewById(R.id.seekOffset);
+        final SeekBar seekFraction = (SeekBar) findViewById(R.id.seekFraction);
 
         final TextView textAngle = (TextView) findViewById(R.id.textAngle);
         final TextView textOffset = (TextView) findViewById(R.id.textOffset);
         final TextView textFinal = (TextView) findViewById(R.id.textFinal);
+        final TextView textFraction = (TextView) findViewById(R.id.textFraction);
 
         assert seekAngle != null;
         seekAngle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -93,13 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                multiplierValue = calc.getInverseSin(p);
                 assert textAngle != null;
                 textAngle.setText(String.valueOf(p));
 
                 angleValue = p;
-                int inches = calc.getInches(calc.getOffset(angleValue,offsetValue));
-                String fraction = calc.getFractions(calc.getOffset(angleValue,offsetValue));
+                int inches = calc.getInches(calc.getOffset(angleValue,offsetValue+offsetFraction));
+                String fraction = calc.getFractions(calc.getOffset(angleValue,offsetValue+offsetFraction));
 
                 assert textFinal != null;
                 textFinal.setText(String.valueOf(inches)  + "  " + fraction + '"');
@@ -109,19 +107,17 @@ public class MainActivity extends AppCompatActivity {
         assert seekOffset != null;
         seekOffset.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            double p=0;
+            int p = 0;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                p = progress * .125;
+                p = progress;
                 offsetValue = p;
 
                 int inches = calc.getInches(p);
-                String fraction = calc.getFractions(p);
-
 
                 assert textOffset != null;
-                textOffset.setText(String.valueOf(inches) + "  " + fraction + '"');
+                textOffset.setText(String.valueOf(inches));
 
             }
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -133,11 +129,11 @@ public class MainActivity extends AppCompatActivity {
                 int inches = calc.getInches(p);
                 String fraction = calc.getFractions(p);
 
-                int inchesF = calc.getInches(calc.getOffset(angleValue,offsetValue));
-                String fractionF = calc.getFractions(calc.getOffset(angleValue,offsetValue));
+                String fractionF = calc.getFractions(calc.getOffset(angleValue,offsetValue+offsetFraction));
+                int inchesF = calc.getInches(calc.getOffset(angleValue,offsetValue+offsetFraction));
 
                 assert textOffset != null;
-                textOffset.setText(String.valueOf(inches)  + "  " + fraction + '"');
+                textOffset.setText(String.valueOf(inches));
 
 
                 assert textFinal != null;
@@ -145,6 +141,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        assert seekFraction != null;
+        seekFraction.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            double p = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                p = progress * .125;
+
+                String fraction = calc.getFractions(p);
+
+                textFraction.setText(String.valueOf(fraction));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                offsetFraction = p;
+
+                String fractionF = calc.getFractions(calc.getOffset(angleValue,offsetValue+offsetFraction));
+                int inchesF = calc.getInches(calc.getOffset(angleValue,offsetValue+offsetFraction));
+
+
+                assert textFinal != null;
+                textFinal.setText(String.valueOf(inchesF)  + "  " + fractionF + '"');
+
+            }
+        });
     }
 }
