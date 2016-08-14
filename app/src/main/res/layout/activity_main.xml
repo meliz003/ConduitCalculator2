@@ -39,35 +39,35 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/angle"
                 android:id="@+id/textAngleTitle"
-                android:textSize="30sp"
-                android:layout_weight="1" />
+                android:textSize="30sp" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/textAngle"
                 android:textSize="40sp"
                 android:text="@string/_0"
                 android:layout_column="3"
-                android:layout_weight="1" />
+                android:layout_marginLeft="25sp" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
 
             <SeekBar
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/seekAngle"
-                android:max="60"
+                android:max="48"
                 android:indeterminate="false"
                 android:progress="0"
                 android:progressBackgroundTint="#ffffff"
@@ -77,20 +77,21 @@
 
         <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/offset"
                 android:id="@+id/textOffsetTitle"
                 android:textSize="30sp"
-                android:layout_gravity="left|center"
-                android:layout_weight="1" />
+                android:layout_gravity="left|center" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/textOffset"
@@ -98,24 +99,54 @@
                 android:text="@string/textOffset"
                 android:layout_column="3"
                 android:layout_gravity="center|right"
-                android:layout_weight="1" />
+                android:layout_marginLeft="0sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textFraction"
+                android:textSize="40sp"
+                android:text="@string/textOffset"
+                android:layout_column="21"
+                android:layout_gravity="center|right"
+                android:layout_marginLeft="10sp" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
 
             <SeekBar
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/seekOffset"
-                android:max="384"
+                android:max="72"
                 android:indeterminate="false"
-                android:progress="1"
+                android:progress="0"
                 android:progressBackgroundTint="#ffffff"
                 android:layout_weight="1"
                 android:layout_gravity="center" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30sp">
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekFraction"
+                android:max="7"
+                android:indeterminate="false"
+                android:progressBackgroundTint="#ffffff"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
         </TableRow>
 
     </TableLayout>
