@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Conduit Calculator</string>
+    <string name="app_name">Offset Calculator</string>
     <string name="_0">0</string>
     <string name="angle">Angle:</string>
     <string name="offset">Offset:</string>
