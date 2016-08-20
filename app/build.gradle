@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'OffsetBender'
+            keyPassword '$asdf05'
+            storeFile file('C:/Users/Matthw/AndroidStudioProjects/ConduitCalculator2/OffsetBender.jks')
+            storePassword '$asdf05'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "24.0.1"
-
     defaultConfig {
         applicationId "net.unionsparkie.conduitcalculator"
         minSdkVersion 23
@@ -15,12 +22,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            zipAlignEnabled true
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
 }
