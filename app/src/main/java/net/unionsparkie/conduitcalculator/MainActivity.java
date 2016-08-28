@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView textFinal = (TextView) findViewById(R.id.textFinal);
         final TextView textFraction = (TextView) findViewById(R.id.textFraction);
 
+
+        assert textFinal != null;
+        textFinal.setText(String.valueOf(calc.getInches(calc.getOffset(angleValue,offsetValue+offsetFraction))) + " " + calc.getFractions(calc.getOffset(angleValue,offsetValue+offsetFraction)) + '"');
+
+
         assert seekAngle != null;
         seekAngle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -152,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String fraction = calc.getFractions(p);
 
+                assert textFraction != null;
                 textFraction.setText(String.valueOf(fraction));
             }
 
@@ -168,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 int inchesF = calc.getInches(calc.getOffset(angleValue,offsetValue+offsetFraction));
 
 
-                assert textFinal != null;
                 textFinal.setText(String.valueOf(inchesF)  + "  " + fractionF + '"');
 
             }
